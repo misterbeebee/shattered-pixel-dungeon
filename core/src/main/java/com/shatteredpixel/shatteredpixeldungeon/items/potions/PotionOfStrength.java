@@ -32,6 +32,8 @@ public class PotionOfStrength extends Potion {
 
 	{
 		icon = ItemSpriteSheet.Icons.POTION_STRENGTH;
+
+		unique = true;
 	}
 	
 	@Override
@@ -46,7 +48,7 @@ public class PotionOfStrength extends Potion {
 	}
 
 	@Override
-	public int price() {
-		return isKnown() ? 50 * quantity : super.price();
+	public int value() {
+		return isKnown() ? 50 * quantity : super.value();
 	}
 }

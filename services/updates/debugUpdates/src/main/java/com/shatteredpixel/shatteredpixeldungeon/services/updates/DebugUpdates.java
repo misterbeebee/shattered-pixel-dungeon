@@ -30,26 +30,39 @@ public class DebugUpdates extends UpdateService {
 	private static AvailableUpdateData debugUpdateInfo;
 
 	@Override
-	public void checkForUpdate(UpdateResultCallback callback) {
+	public boolean isUpdateable() {
+		return false; //turn on to debug update prompts
+	}
 
-		//turn on to test update UI
-		if (false){
-			debugUpdateInfo = new AvailableUpdateData();
-			debugUpdateInfo.versionCode = Game.versionCode+1;
-			debugUpdateInfo.URL = "http://www.google.com";
+	@Override
+	public void checkForUpdate(boolean useMetered, UpdateResultCallback callback) {
 
-			callback.onUpdateAvailable(debugUpdateInfo);
-		} else {
-			debugUpdateInfo = null;
-
-			callback.onNoUpdateFound();
+		if (!useMetered && !Game.platform.connectedToUnmeteredNetwork()){
+			callback.onConnectionFailed();
+			return;
 		}
+
+		debugUpdateInfo = new AvailableUpdateData();
+		debugUpdateInfo.versionCode = Game.versionCode+1;
+		debugUpdateInfo.URL = "http://www.google.com";
+
+		callback.onUpdateAvailable(debugUpdateInfo);
 
 	}
 
 	@Override
 	public void initializeUpdate(AvailableUpdateData update) {
 		DeviceCompat.openURI( update.URL );
+	}
+
+	@Override
+	public boolean isInstallable() {
+		return false; //turn on to test install prompts
+	}
+
+	@Override
+	public void initializeInstall() {
+		//does nothing
 	}
 
 }

@@ -39,9 +39,14 @@ public class GitHubUpdates extends UpdateService {
 	private static Pattern versionCodePattern = Pattern.compile("internal version number: ([0-9]*)", Pattern.CASE_INSENSITIVE);
 
 	@Override
-	public void checkForUpdate(UpdateResultCallback callback) {
+	public boolean isUpdateable() {
+		return true;
+	}
 
-		if (!Game.platform.connectedToUnmeteredNetwork()){
+	@Override
+	public void checkForUpdate(boolean useMetered, UpdateResultCallback callback) {
+
+		if (!useMetered && !Game.platform.connectedToUnmeteredNetwork()){
 			callback.onConnectionFailed();
 			return;
 		}
@@ -118,6 +123,16 @@ public class GitHubUpdates extends UpdateService {
 	@Override
 	public void initializeUpdate(AvailableUpdateData update) {
 		DeviceCompat.openURI( update.URL );
+	}
+
+	@Override
+	public boolean isInstallable() {
+		return false;
+	}
+
+	@Override
+	public void initializeInstall() {
+		//does nothing, always installed
 	}
 
 }

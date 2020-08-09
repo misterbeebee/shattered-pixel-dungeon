@@ -36,6 +36,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorrosion;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLivingEarth;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfRegrowth;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -43,8 +44,8 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndBag;
-import com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.PixelParticle;
@@ -132,6 +133,18 @@ public class MagesStaff extends MeleeWeapon {
 			else                             wand.cursed = false;
 			wand.execute(hero, AC_ZAP);
 		}
+	}
+
+	@Override
+	public int buffedLvl() {
+		int lvl = super.buffedLvl();
+		if (curUser != null && wand != null) {
+			WandOfMagicMissile.MagicCharge buff = curUser.buff(WandOfMagicMissile.MagicCharge.class);
+			if (buff != null && buff.level() > lvl){
+				return buff.level();
+			}
+		}
+		return lvl;
 	}
 
 	@Override
@@ -295,7 +308,7 @@ public class MagesStaff extends MeleeWeapon {
 	}
 
 	@Override
-	public int price() {
+	public int value() {
 		return 0;
 	}
 	

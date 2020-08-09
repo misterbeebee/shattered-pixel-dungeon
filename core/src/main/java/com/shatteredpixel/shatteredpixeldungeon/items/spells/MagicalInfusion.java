@@ -38,6 +38,8 @@ public class MagicalInfusion extends InventorySpell {
 	{
 		mode = WndBag.Mode.UPGRADEABLE;
 		image = ItemSpriteSheet.MAGIC_INFUSE;
+
+		unique = true;
 	}
 	
 	@Override
@@ -60,7 +62,7 @@ public class MagicalInfusion extends InventorySpell {
 	}
 	
 	@Override
-	public int price() {
+	public int value() {
 		//prices of ingredients, divided by output quantity
 		return Math.round(quantity * ((50 + 40) / 1f));
 	}

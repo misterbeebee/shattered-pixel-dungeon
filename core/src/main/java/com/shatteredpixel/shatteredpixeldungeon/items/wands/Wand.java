@@ -279,7 +279,7 @@ public abstract class Wand extends Item {
 	@Override
 	public int buffedLvl() {
 		int lvl = super.buffedLvl();
-		if (curUser != null && !(this instanceof WandOfMagicMissile)) {
+		if (curUser != null) {
 			WandOfMagicMissile.MagicCharge buff = curUser.buff(WandOfMagicMissile.MagicCharge.class);
 			if (buff != null && buff.level() > lvl){
 				return buff.level();
@@ -366,7 +366,7 @@ public abstract class Wand extends Item {
 	}
 	
 	@Override
-	public int price() {
+	public int value() {
 		int price = 75;
 		if (cursed && cursedKnown) {
 			price /= 2;

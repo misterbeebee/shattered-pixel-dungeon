@@ -96,7 +96,6 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTrap;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndMessage;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndStory;
-import com.shatteredpixel.shatteredpixeldungeon.windows.WndTradeItem;
 import com.watabou.glwrap.Blending;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
@@ -1025,7 +1024,7 @@ public class GameScene extends PixelScene {
 		return wnd;
 	}
 	
-	static boolean cancel() {
+	public static boolean cancel() {
 		if (Dungeon.hero != null && (Dungeon.hero.curAction != null || Dungeon.hero.resting)) {
 			
 			Dungeon.hero.curAction = null;

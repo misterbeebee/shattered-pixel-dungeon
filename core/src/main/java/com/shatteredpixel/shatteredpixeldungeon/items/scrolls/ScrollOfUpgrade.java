@@ -43,6 +43,8 @@ public class ScrollOfUpgrade extends InventoryScroll {
 	{
 		icon = ItemSpriteSheet.Icons.SCROLL_UPGRADE;
 		mode = WndBag.Mode.UPGRADEABLE;
+
+		unique = true;
 	}
 	
 	@Override
@@ -126,7 +128,7 @@ public class ScrollOfUpgrade extends InventoryScroll {
 	}
 	
 	@Override
-	public int price() {
-		return isKnown() ? 50 * quantity : super.price();
+	public int value() {
+		return isKnown() ? 50 * quantity : super.value();
 	}
 }

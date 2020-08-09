@@ -63,10 +63,12 @@ public class Rotberry extends Plant {
 			image = ItemSpriteSheet.SEED_ROTBERRY;
 
 			plantClass = Rotberry.class;
+
+			unique = true;
 		}
 		
 		@Override
-		public int price() {
+		public int value() {
 			return 30 * quantity;
 		}
 	}

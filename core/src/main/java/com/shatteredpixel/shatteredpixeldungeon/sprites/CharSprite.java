@@ -46,7 +46,6 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.MovieClip;
 import com.watabou.noosa.NoosaScript;
-import com.watabou.noosa.Visual;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.tweeners.AlphaTweener;
@@ -340,7 +339,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 		flashTime = FLASH_INTERVAL;
 	}
 	
-	public synchronized void add( State state ) {
+	public void add( State state ) {
 		switch (state) {
 			case BURNING:
 				burning = emitter();
@@ -394,7 +393,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 		}
 	}
 	
-	public synchronized void remove( State state ) {
+	public void remove( State state ) {
 		switch (state) {
 			case BURNING:
 				if (burning != null) {

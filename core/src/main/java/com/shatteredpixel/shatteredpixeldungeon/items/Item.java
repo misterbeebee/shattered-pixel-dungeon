@@ -130,7 +130,8 @@ public class Item implements Bundlable {
 	}
 	
 	public void execute( Hero hero, String action ) {
-		
+
+		GameScene.cancel();
 		curUser = hero;
 		curItem = this;
 		
@@ -437,7 +438,7 @@ public class Item implements Bundlable {
 		return this;
 	}
 	
-	public int price() {
+	public int value() {
 		return 0;
 	}
 	

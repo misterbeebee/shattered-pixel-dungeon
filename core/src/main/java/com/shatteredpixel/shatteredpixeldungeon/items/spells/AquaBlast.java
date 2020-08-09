@@ -29,10 +29,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Splash;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfStormClouds;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
-import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -64,7 +61,7 @@ public class AquaBlast extends TargetedSpell {
 	}
 	
 	@Override
-	public int price() {
+	public int value() {
 		//prices of ingredients, divided by output quantity
 		return Math.round(quantity * ((60 + 40) / 12f));
 	}

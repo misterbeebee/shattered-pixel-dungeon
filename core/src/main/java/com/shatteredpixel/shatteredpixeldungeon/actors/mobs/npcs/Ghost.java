@@ -25,8 +25,6 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Roots;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.FetidRat;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.GnollTrickster;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.GreatCrab;
@@ -68,8 +66,12 @@ public class Ghost extends NPC {
 
 	@Override
 	protected boolean act() {
-		if (Quest.processed())
+		if (Quest.processed()) {
 			target = Dungeon.hero.pos;
+		}
+		if (Dungeon.level.heroFOV[pos] && !Quest.completed()){
+			Notes.add( Notes.Landmark.GHOST );
+		}
 		return super.act();
 	}
 
@@ -176,7 +178,6 @@ public class Ghost extends NPC {
 			if (questBoss.pos != -1) {
 				GameScene.add(questBoss);
 				Quest.given = true;
-				Notes.add( Notes.Landmark.GHOST );
 				Game.runOnRenderThread(new Callback() {
 					@Override
 					public void call() {

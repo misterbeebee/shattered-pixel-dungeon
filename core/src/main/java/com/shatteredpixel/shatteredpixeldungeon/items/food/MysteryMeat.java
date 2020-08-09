@@ -24,7 +24,6 @@ package com.shatteredpixel.shatteredpixeldungeon.items.food;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Poison;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Roots;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Slow;
@@ -48,7 +47,7 @@ public class MysteryMeat extends Food {
 		effect(hero);
 	}
 
-	public int price() {
+	public int value() {
 		return 5 * quantity;
 	}
 

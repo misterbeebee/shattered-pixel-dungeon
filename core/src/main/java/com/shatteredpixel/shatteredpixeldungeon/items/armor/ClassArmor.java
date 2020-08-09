@@ -21,7 +21,6 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.armor;
 
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Invisibility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -174,7 +173,7 @@ abstract public class ClassArmor extends Armor {
 	}
 	
 	@Override
-	public int price() {
+	public int value() {
 		return 0;
 	}
 

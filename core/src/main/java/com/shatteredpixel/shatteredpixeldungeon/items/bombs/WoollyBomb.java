@@ -61,12 +61,12 @@ public class WoollyBomb extends Bomb {
 		}
 		
 		Sample.INSTANCE.play(Assets.Sounds.PUFF);
-		
+		Sample.INSTANCE.play(Assets.Sounds.SHEEP);
 		
 	}
 	
 	@Override
-	public int price() {
+	public int value() {
 		//prices of ingredients
 		return quantity * (20 + 30);
 	}

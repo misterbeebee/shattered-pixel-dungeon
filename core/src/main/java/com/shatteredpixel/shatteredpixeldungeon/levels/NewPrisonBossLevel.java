@@ -38,7 +38,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.HeavyBoomerang;
-import com.shatteredpixel.shatteredpixeldungeon.levels.features.Maze;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.TenguDartTrap;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
@@ -583,6 +582,7 @@ public class NewPrisonBossLevel extends Level {
 				int cell = x+tenguCell.left+1 + (y+tenguCell.top+1)*width();
 				if (Blob.volumeAt(cell, StormCloud.class) == 0
 						&& Blob.volumeAt(cell, Regrowth.class) <= 9
+						&& Dungeon.level.plants.get(cell) == null
 						&& Actor.findChar(cell) == null) {
 					Level.set(cell, Terrain.SECRET_TRAP);
 					setTrap(new TenguDartTrap().hide(), cell);
