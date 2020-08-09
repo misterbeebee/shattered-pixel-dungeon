@@ -271,10 +271,7 @@ public class Toolbar extends Component {
 			PointF start = camera().screenToCamera(screen.x, screen.y);
 
 			x = this.startX = start.x - ItemSprite.SIZE / 2;
-			y = this.startY = start.y - ItemSprite.SIZE / 2
-					// FIXME DO NOT SUBMIT
-					+ 100
-			;
+			y = this.startY = start.y - ItemSprite.SIZE / 2;
 
 			this.endX = endX - ItemSprite.SIZE / 2;
 			this.endY = endY - ItemSprite.SIZE / 2;

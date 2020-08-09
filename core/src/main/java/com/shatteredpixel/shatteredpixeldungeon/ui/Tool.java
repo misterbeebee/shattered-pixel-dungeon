@@ -30,8 +30,8 @@ public class Tool extends Button {
     public void frame( Visual.Footprint f) {
         base.frame(f);
 
-        this.width = width;
-        this.height = height;
+        this.width = f.width;
+        this.height = f.height;
     }
 
     @Override

@@ -58,7 +58,10 @@ public class Visual extends Gizmo {
 
 	// TODO: move to its own file
 	public static class Footprint {
-		final int x; final int y; final int width; final int height;
+		public final int x;
+		public final int y;
+		public final int width;
+		public final int height;
 		public static final Footprint NONE = new Footprint(0,0,0,0);
 
 		public Footprint(int x_, int y_, int width_, int height_) {
