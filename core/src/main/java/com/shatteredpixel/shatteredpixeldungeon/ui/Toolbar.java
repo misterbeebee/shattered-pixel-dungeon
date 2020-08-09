@@ -49,9 +49,9 @@ public class Toolbar extends Component {
 	private Tool btnSearch;
 	private Tool btnInventory;
 	private Tool.QuickslotTool[] btnQuick;
-	
+
 	private PickedUpItem pickedUp;
-	
+
 	private boolean lastEnabled = true;
 	public boolean examining = false;
 
@@ -62,7 +62,7 @@ public class Toolbar extends Component {
 		GROUP,
 		CENTER
 	}
-	
+
 	public Toolbar() {
 		super();
 
@@ -98,7 +98,7 @@ public class Toolbar extends Component {
 		add(btnInventory);
 		add(pickedUp = new PickedUpItem());
 	}
-	
+
 	@Override
 	protected void layout() {
 		// Build border/frame for quicklots
@@ -124,13 +124,13 @@ public class Toolbar extends Component {
 		}
 
 		// Cursor for right-side of next button to draw.
-		float rightCursor = width;
+		float right = width;
 		switch(Mode.valueOf(SPDSettings.toolbarMode())){
 			case SPLIT: {
 				btnWait.setPos(x, y);
 				btnSearch.setPos(btnWait.right(), y);
 
-				btnInventory.setPos(rightCursor - btnInventory.width(), y);
+				btnInventory.setPos(right - btnInventory.width(), y);
 				Tool previousButton = btnInventory;
 				for (int i = 0; i < SPDAction.QUICKSLOT_COUNT; i++) {
 					QuickslotTool button = btnQuick[i];
@@ -156,11 +156,11 @@ public class Toolbar extends Component {
 				for (Button slot : btnQuick) {
 					if (slot.visible) toolbarWidth += slot.width();
 				}
-				rightCursor = (width + toolbarWidth) / 2;
+				right = (width + toolbarWidth) / 2;
 			}
 			// fallthrough
 			case GROUP: {
-				btnWait.setPos(rightCursor - btnWait.width(), y);
+				btnWait.setPos(right - btnWait.width(), y);
 				btnSearch.setPos(btnWait.left() - btnSearch.width(), y);
 				btnInventory.setPos(btnSearch.left() - btnInventory.width(), y);
 
@@ -181,16 +181,16 @@ public class Toolbar extends Component {
 				break;
 			}
 		}
-		rightCursor = width;
+		right = width;
 
 		if (SPDSettings.flipToolbar()) {
 
-			btnWait.setPos( (rightCursor - btnWait.right()), y);
-			btnSearch.setPos( (rightCursor - btnSearch.right()), y);
-			btnInventory.setPos( (rightCursor - btnInventory.right()), y);
+			btnWait.setPos( (right - btnWait.right()), y);
+			btnSearch.setPos( (right - btnSearch.right()), y);
+			btnInventory.setPos( (right - btnInventory.right()), y);
 
 			for(int i = 0; i <= 3; i++) {
-				btnQuick[i].setPos( rightCursor - btnQuick[i].right(), y+2);
+				btnQuick[i].setPos( right - btnQuick[i].right(), y+2);
 			}
 
 		}
@@ -200,33 +200,33 @@ public class Toolbar extends Component {
 	public static void updateLayout(){
 		if (instance != null) instance.layout();
 	}
-	
+
 	@Override
 	public void update() {
 		super.update();
-		
+
 		if (lastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive())) {
 			lastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
-			
+
 			for (Gizmo tool : members) {
 				if (tool instanceof Tool) {
 					((Tool)tool).enable( lastEnabled );
 				}
 			}
 		}
-		
+
 		if (!Dungeon.hero.isAlive()) {
 			btnInventory.enable(true);
 		}
 	}
-	
+
 	public void pickup( Item item, int cell ) {
 		pickedUp.reset( item,
 			cell,
 			btnInventory.centerX(),
 			btnInventory.centerY());
 	}
-	
+
 	static CellSelector.Listener informer = new CellSelector.Listener() {
 		@Override
 		public void onSelect( Integer cell ) {
@@ -241,61 +241,64 @@ public class Toolbar extends Component {
 
 
 	public static class PickedUpItem extends ItemSprite {
-		
+
 		private static final float DURATION = 0.5f;
-		
+
 		private float startScale;
 		private float startX, startY;
 		private float endX, endY;
 		private float left;
-		
+
 		public PickedUpItem() {
 			super();
-			
+
 			originToCenter();
-			
+
 			active =
 			visible =
 				false;
 		}
-		
+
 		public void reset( Item item, int cell, float endX, float endY ) {
 			view( item );
-			
+
 			active =
 			visible =
 				true;
-			
+
 			PointF tile = DungeonTerrainTilemap.raisedTileCenterToWorld(cell);
 			Point screen = Camera.main.cameraToScreen(tile.x, tile.y);
 			PointF start = camera().screenToCamera(screen.x, screen.y);
-			
+
 			x = this.startX = start.x - ItemSprite.SIZE / 2;
-			y = this.startY = start.y - ItemSprite.SIZE / 2;
-			
+			y = this.startY = start.y - ItemSprite.SIZE / 2
+					// FIXME DO NOT SUBMIT
+					+ 100
+			;
+
 			this.endX = endX - ItemSprite.SIZE / 2;
 			this.endY = endY - ItemSprite.SIZE / 2;
 			left = DURATION;
-			
+
 			scale.set( startScale = Camera.main.zoom / camera().zoom );
-			
+
 		}
-		
+
 		@Override
 		public void update() {
 			super.update();
-			
+
 			if ((left -= Game.elapsed) <= 0) {
-				
+
 				visible =
 				active =
 					false;
 				if (emitter != null) emitter.on = false;
-				
+
 			} else {
 				float p = left / DURATION;
 				scale.set( startScale * (float)Math.sqrt( p ) );
-				
+
 				x = startX*p + endX*(1-p);
 				y = startY*p + endY*(1-p);
 			}
