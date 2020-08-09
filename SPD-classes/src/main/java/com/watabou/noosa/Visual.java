@@ -54,8 +54,27 @@ public class Visual extends Gizmo {
 
 	private float lastX, lastY, lastW, lastH, lastA;
 	private PointF lastScale = new PointF(), lastOrigin = new PointF();
-	
-	public Visual( float x, float y, float width, float height ) {
+
+
+	// TODO: move to its own file
+	public static class Footprint {
+		final int x; final int y; final int width; final int height;
+		public static final Footprint NONE = new Footprint(0,0,0,0);
+
+		public Footprint(int x_, int y_, int width_, int height_) {
+			x=x_;
+			y=y_;
+			width=width_;
+			height=height_;
+		}
+	}
+
+
+	public Visual(Footprint f) {
+		this(f.x, f.y,f.width,f.height);
+	}
+
+	public Visual(float x,float y, float width,float height){
 		this.x = x;
 		this.y = y;
 		this.width = width;

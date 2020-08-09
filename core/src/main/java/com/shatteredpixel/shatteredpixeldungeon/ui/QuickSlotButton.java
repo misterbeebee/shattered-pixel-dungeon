@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.ui;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.QuickSlot;
 import com.shatteredpixel.shatteredpixeldungeon.SPDAction;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -38,30 +39,30 @@ import com.watabou.noosa.ui.Button;
 import com.watabou.utils.PathFinder;
 
 public class QuickSlotButton extends Button implements WndBag.Listener {
-	
-	private static QuickSlotButton[] instance = new QuickSlotButton[4];
+
+	private static QuickSlotButton[] instance = new QuickSlotButton[QuickSlot.SIZE];
 	private int slotNum;
 
 	private ItemSlot slot;
-	
+
 	private static Image crossB;
 	private static Image crossM;
-	
+
 	private static boolean targeting = false;
 	public static Char lastTarget = null;
-	
-	public QuickSlotButton( int slotNum ) {
+
+	public QuickSlotButton(int slotNum) {
 		super();
 		this.slotNum = slotNum;
-		item( select( slotNum ) );
-		
+		item(select(slotNum));
+
 		instance[slotNum] = this;
 	}
-	
+
 	@Override
 	public void destroy() {
 		super.destroy();
-		
+
 		reset();
 	}
 
@@ -70,65 +71,68 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 
 		lastTarget = null;
 	}
-	
+
 	@Override
 	protected void createChildren() {
 		super.createChildren();
-		
+
 		slot = new ItemSlot() {
 			@Override
 			protected void onClick() {
 				if (targeting) {
 					int cell = autoAim(lastTarget, select(slotNum));
 
-					if (cell != -1){
+					if (cell != -1) {
 						GameScene.handleCell(cell);
 					} else {
 						//couldn't auto-aim, just target the position and hope for the best.
-						GameScene.handleCell( lastTarget.pos );
+						GameScene.handleCell(lastTarget.pos);
 					}
 				} else {
 					Item item = select(slotNum);
 					if (item.usesTargeting)
 						useTargeting();
-					item.execute( Dungeon.hero );
+					item.execute(Dungeon.hero);
 				}
 			}
-			
+
 			@Override
 			public GameAction keyAction() {
 				return QuickSlotButton.this.keyAction();
 			}
+
 			@Override
 			protected boolean onLongClick() {
 				return QuickSlotButton.this.onLongClick();
 			}
+
 			@Override
 			protected void onPointerDown() {
-				sprite.lightness( 0.7f );
+				sprite.lightness(0.7f);
 			}
+
 			@Override
 			protected void onPointerUp() {
 				sprite.resetColor();
 			}
 		};
-		slot.showExtraInfo( false );
-		add( slot );
-		
+		slot.showExtraInfo(false);
+		add(slot);
+
 		crossB = Icons.TARGET.get();
 		crossB.visible = false;
-		add( crossB );
-		
+		add(crossB);
+
 		crossM = new Image();
-		crossM.copy( crossB );
+		crossM.copy(crossB);
 	}
-	
+
 	@Override
 	protected void layout() {
 		super.layout();
-		
-		slot.fill( this );
-		
+
+		slot.fill(this);
+
 		crossB.x = x + (width - crossB.width) / 2;
 		crossB.y = y + (height - crossB.height) / 2;
 		PixelScene.align(crossB);
@@ -137,24 +141,16 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 	@Override
 	public void update() {
 		super.update();
-		if (targeting && lastTarget != null && lastTarget.sprite != null){
+		if (targeting && lastTarget != null && lastTarget.sprite != null) {
 			crossM.point(lastTarget.sprite.center(crossM));
 		}
 	}
 
 	@Override
 	public GameAction keyAction() {
-		switch (slotNum){
-			case 0:
-				return SPDAction.QUICKSLOT_1;
-			case 1:
-				return SPDAction.QUICKSLOT_2;
-			case 2:
-				return SPDAction.QUICKSLOT_3;
-			case 3:
-				return SPDAction.QUICKSLOT_4;
-			default:
-				return super.keyAction();
+		if (slotNum >= 0 && slotNum < SPDAction.QUICKSLOT_COUNT) {
+		return SPDAction.QUICKSLOTS[slotNum+1];
+	} else { return super.keyAction();
 		}
 	}
 	

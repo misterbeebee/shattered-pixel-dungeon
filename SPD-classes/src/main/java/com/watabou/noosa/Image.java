@@ -44,8 +44,8 @@ public class Image extends Visual {
 	protected boolean dirty;
 	
 	public Image() {
-		super( 0, 0, 0, 0 );
-		
+		super(Visual.Footprint.NONE);
+
 		vertices = new float[16];
 		verticesBuffer = Quad.create();
 	}
@@ -79,9 +79,14 @@ public class Image extends Visual {
 		updateFrame();
 		updateVertices();
 	}
-	
-	public void frame( int left, int top, int width, int height ) {
-		frame( texture.uvRect( left, top, left + width, top + height ) );
+
+	public void frame(int x, int y, int width, int height) {
+		frame( texture.uvRect( x , y, x + width, y + height ) );
+	}
+
+
+		public void frame(Footprint f) {
+		frame(  f.x , f.y, f.x + f.width, f.y + f.height);
 	}
 	
 	public RectF frame() {

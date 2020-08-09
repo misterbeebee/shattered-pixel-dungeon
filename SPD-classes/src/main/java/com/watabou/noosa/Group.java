@@ -99,7 +99,8 @@ public class Group extends Gizmo {
 	public synchronized int indexOf( Gizmo g ) {
 		return members.indexOf( g );
 	}
-	
+
+	// Adds a Gizmo as child of this gizmo, filling in earliest empty slot, or adding a slot at the end.
 	public synchronized Gizmo add( Gizmo g ) {
 		
 		if (g.parent == this) {
