@@ -38,9 +38,12 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Button;
 import com.watabou.utils.PathFinder;
 
+import java.util.Arrays;
+
 public class QuickSlotButton extends Button implements WndBag.Listener {
 
-	private static QuickSlotButton[] instance = new QuickSlotButton[QuickSlot.SIZE];
+
+	private static final QuickSlotButton[] instance = new QuickSlotButton[SPDAction.QUICKSLOT_COUNT];
 	private int slotNum;
 
 	private ItemSlot slot;
@@ -50,6 +53,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 
 	private static boolean targeting = false;
 	public static Char lastTarget = null;
+	static { reset(); }
 
 	public QuickSlotButton(int slotNum) {
 		super();
@@ -67,8 +71,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 	}
 
 	public static void reset() {
-		instance = new QuickSlotButton[4];
-
+		Arrays.fill(instance, null);
 		lastTarget = null;
 	}
 

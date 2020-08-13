@@ -100,7 +100,7 @@ public class Group extends Gizmo {
 		return members.indexOf( g );
 	}
 
-	// Adds a Gizmo as child of this gizmo, filling in earliest empty slot, or adding a slot at the end.
+	// Adds a Gizmo as a member of this Group, filling in earliest empty slot, or adding a slot at the end.
 	public synchronized Gizmo add( Gizmo g ) {
 		
 		if (g.parent == this) {

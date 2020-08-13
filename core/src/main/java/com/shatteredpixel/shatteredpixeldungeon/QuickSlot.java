@@ -36,7 +36,8 @@ public class QuickSlot {
 	 * which can happen for a stackable item that has been 'used up', these are refered to a placeholders.
 	 */
 
-	//note that the current max size is coded at 4, due to UI constraints, but it could be much much bigger with no issue.
+	//note that the current max size is limited to UI constraints,
+	// but it could be much much bigger with no issue. (SPDAction.java would need updates.)
 	public static int SIZE = 8;
 	private Item[] slots = new Item[SIZE];
 

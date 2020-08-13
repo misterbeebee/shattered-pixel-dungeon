@@ -78,16 +78,19 @@ public class DesktopLauncher {
 
 				if (exceptionMsg.contains("Couldn't create window")){
 					TinyFileDialogs.tinyfd_messageBox(title + " Has Crashed!",
-							title + " wasn't able to initialize it's graphics display, sorry about that!\n\n" +
-									"This usually happens when a computer's graphics card does not support OpenGL 2.0+, or has misconfigured graphics drivers.\n\n" +
+							// Don't put apostrophes in here!
+							title + " wasn't able to initialize graphics display, sorry about that!\n\n" +
+									"This usually happens when a computer graphics card does not support OpenGL 2.0+, or has misconfigured graphics drivers.\n\n" +
 									"If you're certain the game should be working on your computer, feel free to message the developer (Evan@ShatteredPixel.com)\n\n" +
 									"version: " + Game.version, "ok", "error", false);
 				} else {
 					TinyFileDialogs.tinyfd_messageBox(title + " Has Crashed!",
-							title + " has run into an error it can't recover from and has crashed, sorry about that!\n\n" +
+							// Don't put apostrophes in here!
+							title + " has run into an error it cannot recover from and has crashed, sorry about that!\n\n" +
 									"If you could, please email this error message to the developer (Evan@ShatteredPixel.com):\n\n" +
-									"version: " + Game.version + "\n" +
-									exceptionMsg,
+									"version: " + Game.version +
+									 "\n\nexception:" + exceptionMsg
+									,
 							"ok", "error", false);
 				}
 				if (Gdx.app != null) Gdx.app.exit();

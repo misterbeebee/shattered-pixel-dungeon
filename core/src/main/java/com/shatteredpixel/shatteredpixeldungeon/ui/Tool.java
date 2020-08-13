@@ -137,29 +137,6 @@ public class Tool extends Button {
     };
 
 
-    static class ToolbarButton extends Button {
-        protected Toolbar toolbar;
-      public ToolbarButton(Toolbar toolbar) {
-          this.toolbar = toolbar;
-        }
-    }
-
-    static class RestButton extends ToolbarButton {
-        public RestButton(Toolbar toolbar) {
-            super(toolbar);
-        }
-
-        @Override
-        protected void onClick() {
-            toolbar.examining = false;
-            Dungeon.hero.rest(true);
-        }
-
-        @Override
-        public GameAction keyAction() {
-            return SPDAction.REST;
-        }
-    }
 
     static class SearchTool extends Tool {
         public SearchTool(Toolbar t, Visual.Footprint f) { super(t,f);}
@@ -188,7 +165,7 @@ public class Tool extends Button {
 
 
     static class InventoryTool extends Tool {
-        public InventoryTool(Toolbar t,Visual.Footprint f) { super(t, f);}
+        public InventoryTool(Toolbar t, Visual.Footprint f) { super(t, f);}
 
         private GoldIndicator gold;
 

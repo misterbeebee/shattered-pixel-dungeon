@@ -81,13 +81,13 @@ public class Toolbar extends Component {
 		// TODO: comment why these are constructed in reverse-order
 		for (int slotNum = SPDAction.QUICKSLOT_COUNT-1; slotNum >=0; slotNum--) {
 			btnQuick[slotNum] = new Tool.QuickslotTool(this,
-					new Visual.Footprint(24, 0, 20, 26),
+					new Visual.Footprint(64, 0, 22, 24),
 					slotNum);
 			add(btnQuick[slotNum]);
 		}
 		btnWait = new Tool.WaitTool(this, new Visual.Footprint(24, 0, 20, 26));
 		add(btnWait);
-		RestButton btnRest = new RestButton(this); //No positional coordinates!
+		InvisibleTool.RestButton btnRest = new InvisibleTool.RestButton(this);
 		add(btnRest);
 		btnSearch = new Tool.SearchTool(this,new Visual.Footprint(44, 0, 20, 26));
 	    add(btnSearch);
@@ -106,13 +106,13 @@ public class Toolbar extends Component {
 			QuickslotTool button = btnQuick[i];
 			int height = 24;
 			// Why are the x positions different? What are they measuring?
-			if (i == 0 && !SPDSettings.flipToolbar() ||
-				i == (SPDAction.QUICKSLOT_COUNT-1) && SPDSettings.flipToolbar()){
+			if ((i == 0 && !SPDSettings.flipToolbar()) ||
+					(i == (SPDAction.QUICKSLOT_COUNT-1) && SPDSettings.flipToolbar())) {
 				//  Border/frame Left button
 				button.border(0, 2);
 				button.frame(new Visual.Footprint(106, 0, 19, height));
-			} else if (i == 0 && SPDSettings.flipToolbar() ||
-					i == (SPDAction.QUICKSLOT_COUNT-1) && !SPDSettings.flipToolbar()){
+			} else if ((i == 0 && SPDSettings.flipToolbar()) ||
+					(i == (SPDAction.QUICKSLOT_COUNT-1) && !SPDSettings.flipToolbar())) {
 				//  Border/frame Right button
 				button.border(2, 1);
 				button.frame(new Visual.Footprint(86, 0, 20, height));
@@ -189,8 +189,9 @@ public class Toolbar extends Component {
 			btnSearch.setPos( (right - btnSearch.right()), y);
 			btnInventory.setPos( (right - btnInventory.right()), y);
 
-			for(int i = 0; i <= 3; i++) {
-				btnQuick[i].setPos( right - btnQuick[i].right(), y+2);
+			for(int i = 0; i < SPDAction.QUICKSLOT_COUNT ; i++) {
+				QuickslotTool button = btnQuick[i];
+				button.setPos( right - button.right(), y+ button.borderTop);
 			}
 
 		}
@@ -299,30 +300,6 @@ public class Toolbar extends Component {
 				x = startX*p + endX*(1-p);
 				y = startY*p + endY*(1-p);
 			}
-		}
-	}
-
-
-	static class ToolbarButton extends Button {
-		protected Toolbar toolbar;
-		public ToolbarButton(Toolbar t) {
-			this.toolbar = t;
-		}
-	}
-
-	static class RestButton extends ToolbarButton {
-		public RestButton(Toolbar t) {
-			super(t);
-		}
-		@Override
-		protected void onClick() {
-			toolbar.examining = false;
-			Dungeon.hero.rest(true);
-		}
-
-		@Override
-		public GameAction keyAction() {
-			return SPDAction.REST;
 		}
 	}
 }
