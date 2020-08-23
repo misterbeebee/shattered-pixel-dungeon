@@ -3,7 +3,7 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2019 Evan Debenham
+ * Copyright (C) 2014-2021 Evan Debenham
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,57 +37,44 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Button;
 import com.watabou.utils.PathFinder;
 
-import java.util.Arrays;
-
 public class QuickSlotButton extends Button implements WndBag.Listener {
-<<<<<<< HEAD
 
-
-	private static final QuickSlotButton[] instance = new QuickSlotButton[SPDAction.QUICKSLOT_COUNT];
-=======
-	
 	private static QuickSlotButton[] instance = new QuickSlotButton[4];
->>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
 	private int slotNum;
 
 	private ItemSlot slot;
-	
+
 	private static Image crossB;
 	private static Image crossM;
-	
+
 	private static boolean targeting = false;
 	public static Char lastTarget = null;
-<<<<<<< HEAD
-	static { reset(); }
 
-	public QuickSlotButton(int slotNum) {
-=======
-	
 	public QuickSlotButton( int slotNum ) {
->>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
 		super();
 		this.slotNum = slotNum;
 		item( select( slotNum ) );
-		
+
 		instance[slotNum] = this;
 	}
-	
+
 	@Override
 	public void destroy() {
 		super.destroy();
-		
+
 		reset();
 	}
 
 	public static void reset() {
-		Arrays.fill(instance, null);
+		instance = new QuickSlotButton[4];
+
 		lastTarget = null;
 	}
-	
+
 	@Override
 	protected void createChildren() {
 		super.createChildren();
-		
+
 		slot = new ItemSlot() {
 			@Override
 			protected void onClick() {
@@ -107,7 +94,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 					item.execute( Dungeon.hero );
 				}
 			}
-			
+
 			@Override
 			public GameAction keyAction() {
 				return QuickSlotButton.this.keyAction();
@@ -127,21 +114,21 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 		};
 		slot.showExtraInfo( false );
 		add( slot );
-		
+
 		crossB = Icons.TARGET.get();
 		crossB.visible = false;
 		add( crossB );
-		
+
 		crossM = new Image();
 		crossM.copy( crossB );
 	}
-	
+
 	@Override
 	protected void layout() {
 		super.layout();
-		
+
 		slot.fill( this );
-		
+
 		crossB.x = x + (width - crossB.width) / 2;
 		crossB.y = y + (height - crossB.height) / 2;
 		PixelScene.align(crossB);
@@ -170,12 +157,12 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 				return super.keyAction();
 		}
 	}
-	
+
 	@Override
 	protected void onClick() {
 		GameScene.selectItem( this, WndBag.Mode.QUICKSLOT, Messages.get(this, "select_item") );
 	}
-	
+
 	@Override
 	protected boolean onLongClick() {
 		GameScene.selectItem( this, WndBag.Mode.QUICKSLOT, Messages.get(this, "select_item") );
@@ -193,12 +180,12 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 			refresh();
 		}
 	}
-	
+
 	public void item( Item item ) {
 		slot.item( item );
 		enableSlot();
 	}
-	
+
 	public void enable( boolean value ) {
 		active = value;
 		if (value) {
@@ -207,11 +194,11 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 			slot.enable( false );
 		}
 	}
-	
+
 	private void enableSlot() {
 		slot.enable(Dungeon.quickslot.isNonePlaceholder( slotNum ));
 	}
-	
+
 	private void useTargeting() {
 
 		if (lastTarget != null &&
@@ -221,7 +208,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 
 			targeting = true;
 			CharSprite sprite = lastTarget.sprite;
-			
+
 			sprite.parent.addToFront( crossM );
 			crossM.point(sprite.center(crossM));
 
@@ -261,7 +248,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 		//couldn't find a cell, give up.
 		return -1;
 	}
-	
+
 	public static void refresh() {
 		for (int i = 0; i < instance.length; i++) {
 			if (instance[i] != null) {
@@ -269,15 +256,15 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 			}
 		}
 	}
-	
+
 	public static void target( Char target ) {
 		if (target != null && target.alignment != Char.Alignment.ALLY) {
 			lastTarget = target;
-			
+
 			TargetHealthIndicator.instance.target( target );
 		}
 	}
-	
+
 	public static void cancel() {
 		if (targeting) {
 			crossB.visible = false;

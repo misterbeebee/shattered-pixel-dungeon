@@ -3,7 +3,7 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2019 Evan Debenham
+ * Copyright (C) 2014-2021 Evan Debenham
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,14 +36,8 @@ public class QuickSlot {
 	 * which can happen for a stackable item that has been 'used up', these are refered to a placeholders.
 	 */
 
-<<<<<<< HEAD
-	//note that the current max size is limited to UI constraints,
-	// but it could be much much bigger with no issue. (SPDAction.java would need updates.)
-	public static int SIZE = 8;
-=======
 	//note that the current max size is coded at 4, due to UI constraints, but it could be much much bigger with no issue.
 	public static int SIZE = 4;
->>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
 	private Item[] slots = new Item[SIZE];
 
 
@@ -98,11 +92,11 @@ public class QuickSlot {
 	}
 
 	public void convertToPlaceholder(Item item){
-		
+
 		if (contains(item)) {
 			Item placeholder = item.virtual();
 			if (placeholder == null) return;
-			
+
 			for (int i = 0; i < SIZE; i++) {
 				if (getItem(i) == item) setSlot(i, placeholder);
 			}
@@ -113,7 +107,7 @@ public class QuickSlot {
 
 		ArrayList<Item> result = new ArrayList<>();
 		for (int i = 0; i < SIZE; i ++)
-		if (getItem(i) != null && !isPlaceholder(i))
+			if (getItem(i) != null && !isPlaceholder(i))
 				result.add(getItem(i));
 
 		return Random.element(result);
