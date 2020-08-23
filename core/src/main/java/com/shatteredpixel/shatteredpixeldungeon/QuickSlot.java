@@ -36,9 +36,14 @@ public class QuickSlot {
 	 * which can happen for a stackable item that has been 'used up', these are refered to a placeholders.
 	 */
 
+<<<<<<< HEAD
 	//note that the current max size is limited to UI constraints,
 	// but it could be much much bigger with no issue. (SPDAction.java would need updates.)
 	public static int SIZE = 8;
+=======
+	//note that the current max size is coded at 4, due to UI constraints, but it could be much much bigger with no issue.
+	public static int SIZE = 4;
+>>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
 	private Item[] slots = new Item[SIZE];
 
 

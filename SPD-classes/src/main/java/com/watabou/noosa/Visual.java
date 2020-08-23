@@ -54,6 +54,7 @@ public class Visual extends Gizmo {
 
 	private float lastX, lastY, lastW, lastH, lastA;
 	private PointF lastScale = new PointF(), lastOrigin = new PointF();
+<<<<<<< HEAD
 
 
 	// TODO: move to its own file
@@ -78,6 +79,10 @@ public class Visual extends Gizmo {
 	}
 
 	public Visual(float x,float y, float width,float height){
+=======
+	
+	public Visual( float x, float y, float width, float height ) {
+>>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
 		this.x = x;
 		this.y = y;
 		this.width = width;

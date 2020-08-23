@@ -35,14 +35,14 @@ public class PointerArea extends Visual implements Signal.Listener<PointerEvent>
 	public boolean blockWhenInactive = false;
 	
 	public PointerArea( Visual target ) {
-		super(0,0,0,0);
+		super( 0, 0, 0, 0 );
 		this.target = target;
 		
 		PointerEvent.addPointerListener( this );
 	}
 	
 	public PointerArea( float x, float y, float width, float height ) {
-		super(x, y, width, height);
+		super( x, y, width, height );
 		this.target = this;
 		
 		visible = false;

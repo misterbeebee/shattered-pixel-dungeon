@@ -99,8 +99,12 @@ public class Group extends Gizmo {
 	public synchronized int indexOf( Gizmo g ) {
 		return members.indexOf( g );
 	}
+<<<<<<< HEAD
 
 	// Adds a Gizmo as a member of this Group, filling in earliest empty slot, or adding a slot at the end.
+=======
+	
+>>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
 	public synchronized Gizmo add( Gizmo g ) {
 		
 		if (g.parent == this) {

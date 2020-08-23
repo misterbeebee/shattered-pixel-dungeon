@@ -6,14 +6,18 @@ buildscript {
     dependencies {
         //FIXME the version of R8 coming with gradle plugin 4.0.0 causes serious problems
         //noinspection GradleDependency
+<<<<<<< HEAD
         classpath 'com.android.tools.build:gradle:3.6.4'
+=======
+        classpath 'com.android.tools.build:gradle:3.6.3'
+>>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
     }
 }
 
 allprojects {
 
     ext {
-        appName = 'DeShattered Pixel Dungeon'
+        appName = 'Shattered Pixel Dungeon'
         appPackageName = 'com.shatteredpixel.shatteredpixeldungeon'
 
         appVersionCode = 448
@@ -21,9 +25,9 @@ allprojects {
 
         appJavaCompatibility = JavaVersion.VERSION_1_8
 
+        appAndroidCompileSDK = 29
         appAndroidMinSDK = 9
         appAndroidTargetSDK = 29
-        appAndroidCompileSDK = 29
 
         gdxVersion = '1.9.10'
     }

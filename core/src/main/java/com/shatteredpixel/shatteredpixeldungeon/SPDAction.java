@@ -49,29 +49,10 @@ public class SPDAction extends GameAction {
 	public static final GameAction REST        = new SPDAction("rest");
 
 	public static final GameAction INVENTORY   = new SPDAction("inventory");
-
-	// TODO: make it easier to vary the UI size of quickslots, without having to
-	// comment/uncomment lines here.
-	public static final int QUICKSLOT_COUNT = 4;  //Must be <= QuickSlot.SIZE;
-    public static final GameAction QUICKSLOT_1 = new SPDAction("quickslot_1");
+	public static final GameAction QUICKSLOT_1 = new SPDAction("quickslot_1");
 	public static final GameAction QUICKSLOT_2 = new SPDAction("quickslot_2");
 	public static final GameAction QUICKSLOT_3 = new SPDAction("quickslot_3");
 	public static final GameAction QUICKSLOT_4 = new SPDAction("quickslot_4");
-	public static final GameAction QUICKSLOT_5 = new SPDAction("quickslot_5");
-	public static final GameAction QUICKSLOT_6 = new SPDAction("quickslot_6");
-	public static final GameAction QUICKSLOT_7 = new SPDAction("quickslot_7");
-	public static final GameAction QUICKSLOT_8 = new SPDAction("quickslot_8");
-	public static final GameAction[] QUICKSLOTS = {
-			SPDAction.QUICKSLOT_1,
-			SPDAction.QUICKSLOT_2,
-			SPDAction.QUICKSLOT_3,
-			SPDAction.QUICKSLOT_4,
-			SPDAction.QUICKSLOT_5,
-			SPDAction.QUICKSLOT_6,
-			SPDAction.QUICKSLOT_7,
-			SPDAction.QUICKSLOT_8
-	};
-
 
 	public static final GameAction TAG_ATTACK  = new SPDAction("tag_attack");
 	public static final GameAction TAG_DANGER  = new SPDAction("tag_danger");
