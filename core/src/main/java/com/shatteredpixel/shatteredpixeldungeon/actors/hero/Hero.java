@@ -327,14 +327,8 @@ public class Hero extends Char {
 		belongings.weapon = wep;
 		boolean hit = attack( enemy );
 		Invisibility.dispel();
-<<<<<<< HEAD
 		belongings.weapon = belongings.stashedWeapon;
 		belongings.stashedWeapon = null;
-
-=======
-		belongings.weapon = equipped;
-		
->>>>>>> parent of ff6f3c486... Deshatter - Don't delete game on death, and add more quickslots
 		if (subClass == HeroSubClass.GLADIATOR){
 			if (hit) {
 				Buff.affect( this, Combo.class ).hit( enemy );
